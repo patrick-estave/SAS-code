@@ -1,0 +1,237 @@
+
+libname AUD '/folders/myfolders/Mturk/';
+
+data one; set aud.fulldata; run;
+
+data two; set one;
+
+if alc_scr_1 = 1 then alc_scr_2=1;
+if alc_scr_1 = 1 then alc_scr_3=1;
+if alc_scr_2 = 1 then alc_scr_3=1;
+
+
+valid_15=valid_15-3;
+valid_16=valid16;
+valid_17=vali_17;
+
+array prevalid (*) valid_14 valid_15 valid_18;
+do m=1 to dim(prevalid);
+prevalid(m)=3-prevalid(m);
+end;
+
+array pre1 (*) 
+Mini_a_1 Mini_a_2 Mini_a_3 Mini_a_4 Mini_a_5 Mini_a_6 Mini_a_7 Mini_a_8 Mini_a_9 Mini_a_10 Mini_a_11 Mini_a_12 Mini_a_13
+valid_14 valid_15 valid_16 valid_17 valid_18 valid1 valid2 valid2c_1 valid2c_2 valid2c_3 valid2c_4 valid2c_5
+valid3-valid8 valid8a valid_1-valid_5 alcpeer_1;
+do m=1 to dim(pre1);
+pre1(m) = pre1(m) - 1;
+end; 
+
+array scr1 (*) 
+Mini_a_1 Mini_a_2 Mini_a_3 Mini_a_4 Mini_a_5 Mini_a_6 Mini_a_7 Mini_a_8 Mini_a_9 Mini_a_10 Mini_a_11 Mini_a_12 Mini_a_13
+TF_alc_a_1_1 TF_alc_a_1_2 TF_alc_a_1_3 TF_alc_a_1_4 TF_alc_a_1_5 TF_alc_a_1_6 TF_alc_a_1_7
+TF_alc_b_1_1 TF_alc_b_1_2 TF_alc_b_1_3 TF_alc_b_1_4 TF_alc_b_1_5 TF_alc_b_1_6 TF_alc_b_1_7
+TF_alc_c_1_1-TF_alc_c_1_7 alcpeer_1 alcpeer_2 alcpeer_3 alcpeer_4
+valid_14 valid_15 valid_16 valid_17 valid_18 valid1
+valid2 valid2a_9 valid2a_10 valid2a_11
+valid2a_12 valid2a_13 valid2b__1
+valid2b__2 valid2b__3 valid2b__4 valid2b__5
+valid2c_1 valid2c_2 valid2c_3 valid2c_4 valid2c_5
+valid3 valid3b valid3c valid3d valid3e 
+valid4 valid4__1_1 valid4__2_1 valid4__3_1 valid4__4_1
+valid4__5_1 valid4__6_1 valid4__7_1 valid4__8_1
+valid5 valid6 valid7 valid8 valid8a
+valid_1 valid_2 valid_3 valid_4 valid_5;
+do m=1 to dim(scr1);
+if alc_scr_1 = . then scr1(m) = .;
+if alc_scr_1 = 1 then scr1(m) = 0;
+if alc_scr_2 = . then scr1(m) = .;
+if alc_scr_2 = 1 then scr1(m) = 0;
+end; 
+
+array followup (*) Q665 Q666;
+do m=1 to dim(followup);
+if alc_scr_1 = . then followup(m) = .;
+if alc_scr_1 = 1 then followup(m) = 3;
+if alc_scr_2 = . then followup(m) = .;
+if alc_scr_2 = 1 then followup(m) = 3;
+end; 
+
+array scr2 (2) abu_alc_scr_1 mini_a_binge;
+do m=1 to 2;
+if alc_scr_1 = . then scr2(m) = .;
+if alc_scr_1 = 1 then scr2(m) = 1;
+if alc_scr_2 = . then scr2(m) = .;
+if alc_scr_2 = 1 then scr2(m) = 1;
+end; 
+
+
+data three; set two;
+
+alc_weekM = mean (of TF_alc_a_1_1 TF_alc_a_1_2 TF_alc_a_1_3 TF_alc_a_1_4 TF_alc_a_1_5 TF_alc_a_1_6 TF_alc_a_1_7);
+alc_weekHM = mean (of TF_alc_b_1_1 TF_alc_b_1_2 TF_alc_b_1_3 TF_alc_b_1_4 TF_alc_b_1_5 TF_alc_b_1_6 TF_alc_b_1_7); 
+alc_hoursM = mean (of TF_alc_c_1_1-TF_alc_c_1_7);
+
+alc_typyear=Q665; 
+alc_typ5year=Q666;
+
+data four; set three;
+
+array abscr1 (*) 
+Mini_a_1 Mini_a_2 Mini_a_3 Mini_a_4 Mini_a_5 Mini_a_6 Mini_a_7 Mini_a_8 Mini_a_9 Mini_a_10 Mini_a_11 Mini_a_12 Mini_a_13
+valid_14 valid_15 valid_16 valid_17 valid_18 valid1
+valid2 valid2a_9 valid2a_10 valid2a_11
+valid2a_12 valid2a_13 valid2b__1
+valid2b__2 valid2b__3 valid2b__4 valid2b__5
+valid2c_1 valid2c_2 valid2c_3 valid2c_4 valid2c_5
+valid3 valid3b valid3c valid3d valid3e 
+valid4 valid4__1_1 valid4__2_1 valid4__3_1 valid4__4_1
+valid4__5_1 valid4__6_1 valid4__7_1 valid4__8_1
+valid5 valid6 valid7 valid8 valid8a
+valid_1 valid_2 valid_3 valid_4 valid_5 alcpeer_1-alcpeer_4;
+do m=1 to dim(abscr1);
+if abu_alc_scr_1 = 1 & mini_a_binge = 1 then abscr1(m) = 0;
+end; 
+
+
+
+
+
+*PSQI  CHAR VALUES: psqi1 psqi3;
+
+do;
+psqi7 = psqi7 -1;
+
+end; 
+
+
+*C1: subjective sleep quality;
+SubSlpQ = psqi7;
+
+
+
+*COMP2 setup: (1 of 2);
+do;
+if psqi2 = . then Recpsqi2 = .;
+else if psqi2 =< 15 then  Recpsqi2 = 0;
+else if psqi2 in (16:30) then Recpsqi2 = 1;
+else if psqi2 in (31:60) then Recpsqi2 = 2;
+else if psqi2 > 60 then Recpsqi2 = 3;
+end; 
+
+*COMP2 setup: (2 of 2);
+do;
+psqi5_1 = psqi5_1 -1;
+
+end; 
+
+
+SlpLat = psqi5_1+Recpsqi2;
+
+array SL (*) SlpLat;
+array RSL (*) RecSlpLat;
+
+*adjusting Sum of COMP2:;
+
+do m = 1 to dim(SL);
+if SL(m) = . then RSL(m) = .;
+else if SL(m) = 0 then RSL(m) = 0;
+else if SL(m) in (1,2) then RSL(m) = 1;
+else if SL(m) in (3,4) then RSL(m) = 2;
+else if SL(m) in (5,6) then RSL(m) = 3;
+end; 
+
+*COMP2: RecSlpLat;
+
+
+*COMP3: setup (sleep duration); 
+array P4a (*) psqi4a;
+array R4a (*) Recpsqi4a;
+
+do m = 1 to dim(P4a);
+if P4a(m) = . then R4a(m) = .;
+else if P4a(m) > 7 then R4a(m) = 0;
+else if P4a(m) => 6 & P4a(m) =< 7 then R4a(m) = 1;
+else if P4a(m) => 5 & P4a(m) < 6 then R4a(m) = 2;
+else if P4a(m) < 5 then R4a(m) = 3;
+
+end;
+
+*Setup COMP4: sleep duration / hours in bed *100 (for a percent);
+
+do;
+if psqi4a NE . & psqi4b NE . then SlpEff = (psqi4a/psqi4b)*100;
+
+end;
+
+array SE (*) SlpEff;
+array RSE (*) RecSlpEff;
+do m = 1 to dim(SE);
+if SE(m) = . then RSE(m) = .;
+else if SE(m) > 84 then RSE(m) = 0;
+else if SE(m) => 75 and SE(m) =<84 then RSE(m) = 1;
+else if SE(m) => 65 and SE(m) =<74 then RSE(m) = 2;
+else if SE(m) < 65 then RSE(m) = 3;
+end; 
+
+
+*COMP5 setup: sleep efficiency hours slept/hours in bed (in bed = psqi1-psqi3) ; 
+
+array SlpDis (*) psqi5_2 psqi5_3 psqi5_4 psqi5_5 psqi5_6 psqi5_7 psqi5_8 psqi5_9 psqi5_10;
+do m = 1 to dim(SlpDis);
+SlpDis(m) = SlpDis(m) - 1;
+
+end;
+ 
+
+SlpDisSum = sum(of psqi5_2 psqi5_3 psqi5_4 psqi5_5 psqi5_6 psqi5_7 psqi5_8 psqi5_9 psqi5_10); 
+
+
+array SDS (*) SlpDisSum;
+array SDSR (*) RSlpDisSum;
+do m = 1 to dim(SDS);
+if SDS(m) = 0 then SDSR(m) = 0;
+else if SDS(m) in (1:9) then SDSR(m) = 1;
+else if SDS(m) in (10:18) then SDSR(m) = 2;
+else if SDS(m) in (19:27) then SDSR(m) = 3;
+end; 
+
+
+*COMP6 setup:;
+
+do;
+psqi6_1 = psqi6_1 -1;
+
+end; 
+
+SlpMed = psqi6_1;
+
+
+*COMP7 setup:;
+
+do;
+psqi6_2 = psqi6_2 -1;
+
+psqi6_3 = psqi6_3 -1;
+
+end;
+
+SlpDayDisSum = (psqi6_2 + psqi6_3);
+
+array SDDS (*) SlpDayDisSum;
+array RSDDS (*) RSlpDayDisSum;
+do m = 1 to dim(SDDS); 
+if SDDS(m) = 0 then RSDDS(m) = 0;
+else if SDDS(m) in (1:2) then RSDDS(m) = 1;
+else if SDDS(m) in (3:4) then RSDDS(m) = 2;
+else if SDDS(m) in (5:6) then RSDDS(m) = 3;
+end; 
+
+*Global PSQI Score:;
+GPSQIScore =  sum(of SubSlpQ RecSlpLat Recpsqi4a RecSlpEff RSlpDisSum SlpMed RSlpDayDisSum);
+
+proc freq data =four; tables mini_a_1 mini_a_2 mini_a_3 GPSQIScore alc_scr_1 alc_scr_2 TF_alc_a_1_1 TF_alc_a_1_2;
+
+proc print data = two; var mini_a_1 mini_a_2 mini_a_3 GPSQIScore alc_scr_1 alc_scr_2 TF_alc_a_1_1 TF_alc_a_1_2; run;
+
+proc pca data=two; var SubSlpQ RecSlpLat Recpsqi4a RecSlpEff RSlpDisSum SlpMed RSlpDayDisSum;run;
