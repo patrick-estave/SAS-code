@@ -1,0 +1,28 @@
+*two files need to be imported and merged
+
+%Macro ReadCSV (infile , outfile );
+
+PROC IMPORT OUT= &outfile
+
+            DATAFILE= &infile
+
+            DBMS=CSV REPLACE;
+
+     GETNAMES=YES;
+
+     guessingrows=2000;
+RUN;
+
+%Mend ReadCSV;
+
+
+%ReadCSV('/folders/myfolders/Mturk/finalCOVID.csv', work.PE);
+
+%ReadCSV( '/folders/myfolders/Mturk/CovidDataFinal.csv', work.MLE);
+
+proc contents data = PE;
+proc contents data = MLE;
+
+ DATA merged;
+   MERGE PE MLE;
+   BY id;
