@@ -1,0 +1,7 @@
+*simple sum of all variables stored as new varaible
+
+HapnS = sum (of Hapn1 Hapn2 Hapn3 Hapn4 Hapn5 Hapn6 Hapn7 Hapn8 Hapn9 Hapn10 Hapn11 Hapn12 Hapn13 Hapn14 Hapn15 Hapn16 Hapn17); 
+WitnS = sum (of Witn1 Witn2 Witn3 Witn4 Witn5 Witn6 Witn7 Witn8 Witn9 Witn10 Witn11 Witn12 Witn13 Witn14 Witn15 Witn16 Witn17); 
+LrndS = sum (of Lrnd1 Lrnd2 Lrnd3 Lrnd4 Lrnd5 Lrnd6 Lrnd7 Lrnd8 Lrnd9 Lrnd10 Lrnd11 Lrnd12 Lrnd13 Lrnd14 Lrnd15 Lrnd16 Lrnd17); 
+PartS = sum (of Part1 Part2 Part3 Part4 Part5 Part6 Part7 Part8 Part9 Part10 Part11 Part12 Part13 Part14 Part15 Part16 Part17); 
+traumacnt=sum(of HapnS WitnS PartS);
