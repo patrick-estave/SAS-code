@@ -1,0 +1,58 @@
+**creating an array for survey variables related to psychological measures
+
+array lec (*) lec5_1 lec5_2 lec5_3 lec5_4 lec5_5 lec5_6 lec5_7 lec5_8
+lec5_9 lec5_10 lec5_11 lec5_12 lec5_13 lec5_14 lec5_15 lec5_16 lec5_17;
+
+array col(*) Hapn1 Witn1 Lrnd1 Part1 Hapn2 Witn2 Lrnd2 Part2 Hapn3 Witn3 Lrnd3 Part3 Hapn4 Witn4 Lrnd4 Part4
+Hapn5 Witn5 Lrnd5 Part5 Hapn6 Witn6 Lrnd6 Part6 Hapn7 Witn7 Lrnd7 Part7 Hapn8 Witn8 Lrnd8 Part8 Hapn9 Witn9 Lrnd9 Part9 Hapn10 Witn10
+Lrnd10 Part10 Hapn11 Witn11 Lrnd11 Part11 Hapn12 Witn12
+Lrnd12 Part12 Hapn13 Witn13 Lrnd13 Part13 Hapn14 Witn14
+Lrnd14 Part14 Hapn15 Witn15 Lrnd15 Part15 Hapn16 Witn16
+Lrnd16 Part16 Hapn17 Witn17 Lrnd17 Part17;
+
+array Hapn (*) Hapn1-Hapn17;
+array Witn (*) Witn1-Witn17;
+array Lrnd (*) Lrnd1-Lrnd17;
+array Part (*) Part1-Part17;
+
+**if and only if a question was answered, we allow for our new variables to be equal to 0, otherwise we leave them as NA (for unanswered)
+*these will be our dummy variables used for analysis
+do n= 1 to 17;
+if scan(lec(n), 1,",") NE . then
+do;
+Hapn(n)=0;
+Witn(n)=0;
+Lrnd(n)=0; 
+Part(n)=0;
+end;
+
+if scan(lec(n), 1,",") = . then 
+do;
+Hapn(n)=.;
+Witn(n)=.;
+Lrnd(n)=.; 
+Part(n)=.;
+end;
+
+end;
+
+*2 loops created, one for checking each of the 17 variables, another to check each individual cell within the variable
+*each survey question allowed for up to 4 responses, so we check each answer cell by cell and record how indv. responded
+
+do n= 1 to 17;
+    do x = 1 to 4;
+if scan(lec(n), x,",") = "1" then Part(n)=1;
+end; 
+
+do x = 1 to 4;
+if scan(lec(n), x,",") = "2" then Lrnd(n)=1;
+end; 
+do x =1 to 4;
+if scan(lec(n), x,",") = "3" then Witn(n)=1;
+end; 
+do x = 1 to 4;
+if scan(lec(n), x,",") = "4" then Hapn(n)=1;
+end; 
+
+end;
+ 
